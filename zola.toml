@@ -4,6 +4,7 @@ author = "Luke Hannan"
 description = "Biostatistics notes on clinical trials, microbiome analysis, and reproducible research"
 default_language = "en"
 
+ignored_content = ["*.tape", "pixi.toml"]
 minify_html = true
 compile_sass = true
 build_search_index = true

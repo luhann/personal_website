@@ -6,7 +6,8 @@
 {% block content %}
 <section class="blog-shell">
     <header class="blog-hero">
-        <h1 class="eyebrow">Field Notes</h1>
+        <p class="eyebrow">Writing</p>
+        <h1>Field Notes</h1>
         <p>{{ section.description }}</p>
     </header>
 
@@ -19,11 +20,11 @@
             <p class="post-excerpt">{{ page.description }}</p>
             {% endif %}
             {% if page.taxonomies.tags %}
-            <p class="tag-row">
+            <div class="tag-row">
                 {% for tag in page.taxonomies.tags %}
                 <a class="tag-link" href="/tags/{{ tag | slugify }}/">{{ tag }}</a>
                 {% endfor %}
-            </p>
+            </div>
             {% endif %}
         </article>
         {% endfor %}

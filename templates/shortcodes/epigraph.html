@@ -1,0 +1,9 @@
+<blockquote class="epigraph">
+  <p>{{ body }}</p>
+  {% if attribution or source %}
+  <footer>
+    {% if attribution %}<span class="attribution">— {{ attribution }}</span>{% endif %}
+    {% if source %}<span class="source">{% if attribution %}, {% else %}— {% endif %}{{ source }}</span>{% endif %}
+  </footer>
+  {% endif %}
+</blockquote>

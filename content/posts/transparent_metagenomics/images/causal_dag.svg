@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" role="img" aria-label="Directed acyclic graph showing causal ambiguity in microbiome association studies" style="width:100%;max-width:620px;display:block;margin:0 auto;">
+  <defs>
+    <marker id="dag-arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="var(--site-headline)" />
+    </marker>
+    <marker id="dag-arr-assoc" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#cf7d55" />
+    </marker>
+    <marker id="dag-arr-rev" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="var(--site-muted)" />
+    </marker>
+  </defs>
+  <style>
+    .dag text { font-family: 'IBM Plex Sans', Arial, sans-serif; }
+    .dag-title  { fill: var(--site-headline); font-size: 12.5px; font-weight: 600; }
+    .dag-detail { fill: var(--site-muted);    font-size: 10px; }
+    .dag-edge   { fill: var(--site-muted);    font-size: 9px; font-style: italic; }
+  </style>
+
+  <g class="dag">
+
+    <!-- ── NODE: CONFOUNDERS (top-centre, purple) ── -->
+    <rect x="175" y="40" width="270" height="60" rx="3" fill="var(--site-surface-soft)" stroke="var(--site-line)" stroke-width="1"/>
+    <rect x="175" y="40" width="5"   height="60" rx="2" fill="#7c5cbf"/>
+    <text x="195" y="64"  class="dag-title">Unmeasured Confounders</text>
+    <text x="195" y="82"  class="dag-detail">diet · host genetics · antibiotic use · age</text>
+
+    <!-- ── NODE: MICROBIOME (bottom-left, teal) ── -->
+    <rect x="20"  y="210" width="200" height="58" rx="3" fill="var(--site-surface-soft)" stroke="var(--site-line)" stroke-width="1"/>
+    <rect x="20"  y="210" width="5"   height="58" rx="2" fill="#3d9e8c"/>
+    <text x="40"  y="236" class="dag-title">Microbiome</text>
+    <text x="40"  y="254" class="dag-detail">community composition</text>
+
+    <!-- ── NODE: HEALTH OUTCOME (bottom-right, red) ── -->
+    <rect x="400" y="210" width="200" height="58" rx="3" fill="var(--site-surface-soft)" stroke="var(--site-line)" stroke-width="1"/>
+    <rect x="400" y="210" width="5"   height="58" rx="2" fill="#a51c30"/>
+    <text x="420" y="236" class="dag-title">Health Outcome</text>
+    <text x="420" y="254" class="dag-detail">diagnosis · symptom score</text>
+
+    <!-- ── ARROWS: CONFOUNDERS → NODES ── -->
+    <line x1="278" y1="100" x2="96"  y2="212" stroke="var(--site-headline)" stroke-width="1.5" marker-end="url(#dag-arr)"/>
+    <line x1="342" y1="100" x2="504" y2="212" stroke="var(--site-headline)" stroke-width="1.5" marker-end="url(#dag-arr)"/>
+
+    <!-- ── ARROW: M → Y  (observed association, dashed orange, upper) ── -->
+    <line x1="222" y1="228" x2="400" y2="228" stroke="#cf7d55" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#dag-arr-assoc)"/>
+    <text x="311" y="220" text-anchor="middle" class="dag-edge" fill="#cf7d55">observed association (p &lt; 0.05)</text>
+
+    <!-- ── ARROW: Y → M  (reverse causation, dashed muted, lower) ── -->
+    <line x1="400" y1="249" x2="222" y2="249" stroke="var(--site-muted)" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#dag-arr-rev)"/>
+    <text x="311" y="270" text-anchor="middle" class="dag-edge">reverse causation?</text>
+
+    <!-- ── LEGEND ── -->
+    <line x1="35"  y1="308" x2="68"  y2="308" stroke="var(--site-headline)" stroke-width="1.5" marker-end="url(#dag-arr)"/>
+    <text x="78"  y="312" class="dag-edge" font-style="normal" fill="var(--site-muted)">established causal path</text>
+
+    <line x1="220" y1="308" x2="253" y2="308" stroke="#cf7d55" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#dag-arr-assoc)"/>
+    <text x="263" y="312" class="dag-edge" font-style="normal" fill="var(--site-muted)">observed association</text>
+
+    <line x1="400" y1="308" x2="433" y2="308" stroke="var(--site-muted)" stroke-width="1" stroke-dasharray="3 4" marker-end="url(#dag-arr-rev)"/>
+    <text x="443" y="312" class="dag-edge" font-style="normal" fill="var(--site-muted)">reverse causation</text>
+
+  </g>
+</svg>

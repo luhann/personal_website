@@ -53,34 +53,35 @@ $code-bg: #000000;
 }
 
 html[data-theme="light"] {
-  --site-bg: #fff;
-  --site-surface: #fff;
-  --site-surface-soft: #eceff3;
-  --site-text: #2c3340;
-  --site-headline: #131822;
-  --site-accent: #2f6f9f;
-  --site-accent-cool: #2f6f9f;
-  --site-accent-meta: #2A565B;
-  --site-muted: #5a6270;
-  --site-line: #cfd6df;
-  --code-bg: #FFFFFF;
+  --site-bg:           #fbfaf7;
+  --site-surface:      #ffffff;
+  --site-surface-soft: #f1ede4;
+  --site-text:         #2c2a26;
+  --site-headline:     #16140f;
+  --site-accent:       #b5612f;
+  --site-accent-cool:  #2f6f9f;
+  --site-accent-alizarin: #9a2233;
+  --site-accent-meta:  #9a2233;
+  --site-muted:        #6b665d;
+  --site-line:         #ddd6c8;
+  --code-bg:           #f5f1e8;
 
-  // Refined Syntax Highlighting (Dark)
-  --syn-text: #{$text};                     // Soft grey text
-  --syn-hl: #{$surface-soft};               // Subtle highlight
-  --syn-ln: #{$muted};                      // Muted line numbers
-  --syn-comment: rgba(127, 134, 141, 0.6);  // Faded $muted for comments
-  --syn-keyword: #{$accent-alizarin};       // Red for keywords (let, const, fn)
-  --syn-string: #{$accent-cool};            // Blue for strings
-  --syn-variable: var(--site-accent-meta);  // Meta for variables/params
-  --syn-constant: #{$text};                 // Neutral for constants
-  --syn-entity: #{$accent};                 // Copper for functions/classes
-  --syn-invalid: #{$accent-alizarin};
-  
-  // Diff Backgrounds
-  --syn-del-bg: rgba(165, 28, 48, 0.15);    // Tinted Alizarin
-  --syn-ins-bg: rgba(79, 141, 191, 0.15);   // Tinted Cool Blue
-  --syn-chg-bg: rgba(207, 125, 85, 0.15);   // Tinted Copper
+  // Syntax Highlighting (Light — warm paper)
+  --syn-text:    #2c2a26;
+  --syn-hl:      #ece6d8;
+  --syn-ln:      #9b958a;
+  --syn-comment: rgba(107, 102, 93, 0.7);
+  --syn-keyword: #9a2233;
+  --syn-string:  #2f6f9f;
+  --syn-variable: #b5612f;
+  --syn-constant: #2c2a26;
+  --syn-entity:  #b5612f;
+  --syn-invalid: #9a2233;
+
+  // Diff Backgrounds (tinted for warm paper)
+  --syn-del-bg: rgba(154, 34, 51, 0.12);
+  --syn-ins-bg: rgba(47, 111, 159, 0.12);
+  --syn-chg-bg: rgba(181, 97, 47, 0.12);
 
   .theme-icon-sun {
     display: none;
@@ -91,14 +92,14 @@ html[data-theme="light"] {
   }
 
   mark {
-    background-color: #dce4ef;
-    color: #182030;
+    background-color: #f0dfc8;
+    color: #16140f;
   }
 
   &::selection {
-  background-color: var(--site-accent-cool);
-}
-
+    background-color: color-mix(in oklab, #b5612f 28%, transparent);
+    color: #16140f;
+  }
 }
 
 // Global Element Resets
@@ -111,7 +112,7 @@ body {
   background-color: var(--site-bg);
   color: var(--site-text);
   font-family: $font-serif;
-  font-feature-settings: "liga" 1, "clig" 1, "kern" 1;
+  font-feature-settings: "liga" 1, "onum" 1, "kern" 1;
   font-variant-numeric: oldstyle-nums proportional-nums;
   font-kerning: normal;
   font-optical-sizing: auto;
@@ -120,6 +121,7 @@ body {
   min-height: 100vh;
   position: relative;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
 
   transition: $transition-style;
@@ -135,8 +137,8 @@ body {
 }
 
 ::selection {
-  background-color: var(--site-accent);
-  color: #ffffff;
+  background-color: color-mix(in oklab, var(--site-accent) 28%, transparent);
+  color: var(--site-headline);
 }
 
 h1,
@@ -145,6 +147,7 @@ h3,
 .site-title {
   color: var(--site-headline);
   font-family: $font-serif, "Times New Roman", serif;
+  font-weight: 500;
   letter-spacing: 0.01em;
 }
 
@@ -157,6 +160,11 @@ a {
 mark {
   background-color: #ecebe8;
   color: #2d3136;
+}
+
+strong {
+  color: var(--site-headline);
+  font-weight: 600;
 }
 
 .icon {
@@ -172,7 +180,7 @@ mark {
   display: flex;
 
   @media (min-width: #{$max-width + 1px}) {
-    padding-left: 140px;
+    padding-left: 200px;
   }
 }
 
@@ -188,7 +196,7 @@ mark {
 
 // Sidebar Scope
 .sidebar {
-  width: 140px;
+  width: 200px;
   background: var(--site-surface);
   border-right: 1px solid var(--site-line);
   display: flex;
@@ -216,14 +224,14 @@ mark {
   align-items: center;
   justify-content: center;
   gap: 0.7rem;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.45rem;
+  font-weight: 500;
   font-family: $font-serif;
   margin-bottom: 1.5rem;
 
   a {
     color: var(--site-headline);
-    font-size: 1.1rem;
+    font-size: 1.45rem;
   }
 
   .theme-toggle {
@@ -243,11 +251,9 @@ mark {
   a {
     color: var(--site-muted);
     font-family: $font-sans;
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     font-weight: 500;
-    letter-spacing: 0.14em;
-    word-spacing: 0.1em;
-    text-transform: uppercase;
+    letter-spacing: 0.02em;
     transition: color $transition-time;
 
     &:hover,
@@ -272,72 +278,26 @@ mark {
 
 // Sidebar Social Component Blocks
 .sidebar-social-block {
-  align-self: center;
-  margin-top: 1rem;
-  background: var(--site-surface-soft);
-  border-radius: 2%;
-  padding: 0.4rem 0 0.4rem 0.4rem;
-  width: 110%;
-}
-
-hr.sidebar-social-block {
-  align-self: center;
-  height: 1px;
-  border: none;
-  background-color: rgba(127, 134, 141, 0.4);
-  margin: 0 0 0.5rem 0;
-  padding: 0;
-  width: 95%;
-}
-
-.sidebar-social-heading {
-  font-family: $font-sans;
-  font-size: 0.85rem;
-  font-weight: 100;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--site-muted);
-  margin: 0 0 0.1rem;
-  padding-bottom: 0.2rem;
-}
-
-.sidebar-social-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  border-top: 1px solid var(--site-line);
+  margin-top: auto;
+  padding-top: 0.75rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-}
-
-.sidebar-social-item {
-  font-size: 0.35rem;
-  font-weight: 100;
-  display: flex;
-  align-items: center;
   gap: 0.5rem;
-  color: var(--site-muted);
-  transition: color $transition-time;
 
   a {
-    color: inherit;
-    font-size: 0.85rem;
-    font-variant: small-caps;
+    color: var(--site-muted);
+    font-family: $font-mono;
+    font-size: 0.72rem;
+    text-decoration: none;
     transition: color $transition-time;
-  }
 
-  &:hover,
-  &:focus-within {
-    color: var(--site-accent);
+    &:hover,
+    &:focus-visible {
+      color: var(--site-accent);
+    }
   }
-}
-
-.sidebar-social-icon {
-  width: 1.1em;
-  height: 1.1em;
-  display: inline-block;
-  vertical-align: middle;
-  fill: currentColor;
 }
 
 // Navigation & Hamburger UI Controls
@@ -478,7 +438,7 @@ hr.sidebar-social-block {
     margin: 0.35rem 0;
   }
 
-  p {
+  p:not(.eyebrow) {
     font-size: 1.1rem;
     max-width: 64ch;
     margin: 0.2rem auto 0;
@@ -488,13 +448,11 @@ hr.sidebar-social-block {
 .eyebrow {
   color: var(--site-accent);
   font-family: $font-sans;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  word-spacing: 0.1em;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   margin: 0;
   text-transform: uppercase;
-  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .blog-archive {
@@ -523,6 +481,7 @@ hr.sidebar-social-block {
       color: var(--site-headline);
       text-decoration: underline;
       text-decoration-color: var(--site-accent-alizarin);
+      text-decoration-thickness: 2px;
       text-underline-offset: 3px;
     }
   }
@@ -530,20 +489,20 @@ hr.sidebar-social-block {
 
 .post-meta {
   color: var(--site-accent-meta);
-  font-family: $font-sans;
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  word-spacing: 0.1em;
+  font-family: $font-mono;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
   margin: 0 0 0.4rem;
-  text-transform: uppercase;
   font-variant-numeric: lining-nums tabular-nums;
 }
 
 .post-description {
   color: var(--site-muted);
-  font-family: $font-sans;
-  font-size: 0.82rem;
+  font-family: $font-serif;
+  font-size: 1.25rem;
   font-style: italic;
+  line-height: 1.45;
+  max-width: 54ch;
 }
 
 .post-excerpt {
@@ -838,17 +797,16 @@ hr.sidebar-social-block {
 
 
   a {
-    background: var(--site-surface);
     color: var(--site-accent);
     text-decoration: none;
-    transition: $transition-style;
-    width: 2rem;
+    transition: color $transition-time;
 
     &:hover,
     &:focus-visible {
-      border-color: var(--site-accent);
-      color: var(--site-headline);
-      transform: translateY(-1px);
+      color: color-mix(in oklab, var(--site-accent) 82%, white);
+      text-decoration: underline;
+      text-decoration-color: color-mix(in oklab, var(--site-accent) 70%, transparent);
+      text-underline-offset: 3px;
     }
   }
 
@@ -880,9 +838,38 @@ hr.sidebar-social-block {
 
   blockquote {
     border-left: 2px solid var(--site-accent);
-    color: #c2c8cf;
+    color: var(--site-headline);
+    font-style: italic;
     margin: 1.25rem 0;
     padding: 0.1rem 0 0.1rem 1rem;
+  }
+
+  .epigraph {
+    border-left: 2px solid var(--site-accent);
+    margin: 2rem 0;
+    padding-left: 1.4rem;
+
+    p {
+      color: var(--site-headline);
+      font-family: $font-serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      line-height: 1.5;
+      margin: 0;
+      text-align: left;
+      text-wrap: pretty;
+    }
+
+    footer {
+      color: var(--site-muted);
+      font-family: $font-mono;
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      margin-top: 0.85rem;
+
+      .attribution { color: var(--site-accent); }
+      .source { font-style: italic; }
+    }
   }
 
   .footnotes {

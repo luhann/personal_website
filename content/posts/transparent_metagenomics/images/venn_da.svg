@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 580 440" role="img" aria-label="Venn diagram showing confidence levels from running three differential abundance methods" style="width:100%;max-width:580px;display:block;margin:0 auto;">
+  <style>
+    .vd text { font-family: 'IBM Plex Sans', Arial, sans-serif; }
+    .vd-header { font-size: 9px; font-weight: 700; letter-spacing: 0.13em; }
+    .vd-method { font-size: 11px; font-weight: 700; letter-spacing: 0.05em; }
+    .vd-conf { font-size: 10.5px; font-weight: 700; }
+    .vd-conf-sub { font-size: 9.5px; }
+  </style>
+  <g class="vd">
+
+    <!-- Title -->
+    <text x="290" y="24" text-anchor="middle" class="vd-header" fill="var(--site-muted)"></text>
+
+    <!-- Three overlapping circles -->
+    <!-- Circle A: ANCOM-BC2 (red / statistical analysis colour) -->
+    <circle cx="210" cy="180" r="115" fill="#a51c30" fill-opacity="0.12" stroke="#a51c30" stroke-width="1.5" stroke-opacity="0.55"/>
+    <!-- Circle B: radEmu (blue / bioinformatics colour) -->
+    <circle cx="360" cy="180" r="115" fill="#4f8dbf" fill-opacity="0.12" stroke="#4f8dbf" stroke-width="1.5" stroke-opacity="0.55"/>
+    <!-- Circle C: MaAsLin3 (orange / wet-lab colour) -->
+    <circle cx="285" cy="272" r="115" fill="#cf7d55" fill-opacity="0.12" stroke="#cf7d55" stroke-width="1.5" stroke-opacity="0.55"/>
+
+    <!-- Method name labels (outside / above each circle) -->
+    <text x="115" y="55" text-anchor="middle" class="vd-method" fill="#a51c30">ANCOM-BC2</text>
+    <text x="462" y="55" text-anchor="middle" class="vd-method" fill="#4f8dbf">radEmu</text>
+    <text x="285" y="420" text-anchor="middle" class="vd-method" fill="#cf7d55">MaAsLin3</text>
+
+    <!-- LOW confidence: unique to a single method -->
+    <text x="143" y="173" text-anchor="middle" class="vd-conf" fill="var(--site-muted)">Low</text>
+    <text x="143" y="187" text-anchor="middle" class="vd-conf-sub" fill="var(--site-muted)">Conf.</text>
+
+    <text x="427" y="173" text-anchor="middle" class="vd-conf" fill="var(--site-muted)">Low</text>
+    <text x="427" y="187" text-anchor="middle" class="vd-conf-sub" fill="var(--site-muted)">Conf.</text>
+
+    <text x="285" y="367" text-anchor="middle" class="vd-conf" fill="var(--site-muted)">Low</text>
+    <text x="285" y="381" text-anchor="middle" class="vd-conf-sub" fill="var(--site-muted)">Conf.</text>
+
+    <!-- MEDIUM confidence: found by exactly two methods -->
+    <!-- A ∩ B (top, above circle C) -->
+    <text x="285" y="134" text-anchor="middle" class="vd-conf" fill="var(--site-headline)">Med.</text>
+    <text x="285" y="148" text-anchor="middle" class="vd-conf-sub" fill="var(--site-headline)">Conf.</text>
+
+    <!-- A ∩ C (left two-way overlap) -->
+    <text x="220" y="262" text-anchor="middle" class="vd-conf" fill="var(--site-headline)">Med.</text>
+    <text x="220" y="276" text-anchor="middle" class="vd-conf-sub" fill="var(--site-headline)">Conf.</text>
+
+    <!-- B ∩ C (right two-way overlap) -->
+    <text x="350" y="262" text-anchor="middle" class="vd-conf" fill="var(--site-headline)">Med.</text>
+    <text x="350" y="276" text-anchor="middle" class="vd-conf-sub" fill="var(--site-headline)">Conf.</text>
+
+    <!-- HIGH confidence: found by all three methods (centroid of circle centres) -->
+    <text x="285" y="205" text-anchor="middle" class="vd-conf" style="font-size:12px;" fill="var(--site-headline)">High</text>
+    <text x="285" y="221" text-anchor="middle" class="vd-conf" style="font-size:12px;" fill="var(--site-headline)">Conf.</text>
+
+  </g>
+</svg>
