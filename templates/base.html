@@ -27,7 +27,7 @@
     @font-face { font-family: "IBM Plex Mono"; src: url("/fonts/IBMPlexMono-Regular.woff2") format("woff2"); font-weight: 400 500; font-style: normal; font-display: swap; }
     </style>
 
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="{{ get_url(path="style.css", cachebust=true) }}">
 </head>
 
 <body class="page-{{ current_path | default(value='home') | trim_end_matches(pat='/') | replace(from='/', to='-') }}">

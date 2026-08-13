@@ -1,0 +1,39 @@
+# Cache-Control rules for Cloudflare Pages. Zola copies this to the root of
+# public/, where Pages reads it (it is never served as an asset itself).
+#
+# Anything not matched below keeps the Pages defaults:
+#   HTML  -> public, max-age=0, must-revalidate  (revalidated by ETag, so edits go live at once)
+#   other -> public, max-age=14400, must-revalidate
+#
+# Do not add a `/*` rule: a request matching several rules inherits all of their
+# headers, which would give those responses two conflicting Cache-Control values.
+
+# Fonts. Content is fixed under these filenames; rename the file if a font is
+# ever swapped, otherwise clients hold the old one for up to a year.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Stylesheet. Linked as /style.css?h=<hash> via get_url(cachebust=true) in
+# templates/base.html, so every rebuild that changes the CSS changes the URL.
+# Keep the cachebust when editing that link or restyles will not reach visitors.
+/style.css
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images, including per-post assets under /posts/<slug>/images/. Filenames are
+# not hashed, so a month rather than a year: a regenerated plot under the same
+# name still reaches readers reasonably soon.
+/*.svg
+  Cache-Control: public, max-age=2592000
+/*.webp
+  Cache-Control: public, max-age=2592000
+/*.png
+  Cache-Control: public, max-age=2592000
+/*.jpg
+  Cache-Control: public, max-age=2592000
+/*.gif
+  Cache-Control: public, max-age=2592000
+
+# Feeds and sitemap: atom.xml, tag feeds, sitemap.xml. Short, so new posts show
+# up in readers quickly.
+/*.xml
+  Cache-Control: public, max-age=3600
