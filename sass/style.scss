@@ -1144,8 +1144,22 @@ strong {
 }
 
 // ==========================================
-// Zola Giallo Syntax Highlighting
+// Zola 0.23 Syntax Highlighting (giallo, class mode)
 // ==========================================
+// Zola 0.23 emits colour-ID classes derived from the theme named in
+// zola.toml ([markdown.highlighting].theme = "github-dark"): each token span
+// gets .z-<id> where the id is the theme's interned colour index. The mapping
+// below mirrors the old semantic palette (--syn-* vars) onto those IDs. If
+// the theme in zola.toml changes, re-derive the IDs from the freshly
+// generated public/giallo.css — do not guess them.
+//
+// ID derivation, github-dark @ zola 0.23.4:
+//   z-3  #6A737D comments            -> --syn-comment
+//   z-4  #79B8FF builtins/numbers    -> --syn-constant
+//   z-6  #9ECBFF strings             -> --syn-string
+//   z-7  #B392F0 types/fn names      -> --syn-entity
+//   z-10 #F97583 keywords            -> --syn-keyword
+//   z-12 #FFAB70 params              -> --syn-variable
 
 .z-code {
   color: var(--syn-text);
@@ -1155,32 +1169,9 @@ strong {
 .z-hl { background-color: var(--syn-hl); }
 .giallo-ln { color: var(--syn-ln); }
 
-// Token Colors
-.z-comment, .z-punctuation.z-definition.z-comment { color: var(--syn-comment); }
-.z-constant, .z-support, .z-meta.z-property-name, .z-meta.z-module-reference, .z-entity.z-name, .z-meta.z-output { color: var(--syn-constant); }
-.z-entity { color: var(--syn-entity); }
-.z-keyword, .z-storage { color: var(--syn-keyword); }
-.z-string, .z-punctuation.z-definition.z-string { color: var(--syn-string); }
-.z-variable, .z-markup.z-changed { color: var(--syn-variable); }
-.z-source.z-regexp, .z-string.z-regexp, .z-string.z-other.z-link, .z-constant.z-character.z-escape, .z-source.z-ruby.z-embedded { color: var(--syn-regexp); }
-.z-markup.z-quote, .z-entity.z-name.z-tag, .z-markup.z-inserted { color: var(--syn-inserted); }
-
-// Invalid and Warnings
-.z-invalid, .z-message.z-error, .z-markup.z-deleted, .z-brackethighlighter.z-unmatched { color: var(--syn-invalid); }
-.z-invalid { font-style: italic; }
-
-// Markup Formatting
-.z-markup.z-heading, .z-entity.z-name, .z-meta.z-separator, .z-meta.z-diff.z-range { font-weight: bold; }
-.z-markup.z-italic { font-style: italic; }
-.z-markup.z-underline, .z-string.z-other.z-link, .z-constant.z-other.z-reference.z-link { text-decoration: underline; }
-.z-markup.z-strikethrough { text-decoration: line-through; }
-
-// Brackets & Punctuation
-.z-brackethighlighter { color: var(--syn-bracket); }
-.z-variable.z-parameter.z-function, .z-storage.z-modifier, .z-storage.z-type.z-java, .z-markup.z-italic, .z-markup.z-bold { color: var(--syn-text); }
-
-// Diff Backgrounds
-.z-markup.z-deleted, .z-punctuation.z-definition.z-deleted, .z-meta.z-diff.z-header.z-from-file { background-color: var(--syn-del-bg); }
-.z-markup.z-inserted, .z-punctuation.z-definition.z-inserted, .z-meta.z-diff.z-header.z-to-file { background-color: var(--syn-ins-bg); }
-.z-markup.z-changed, .z-punctuation.z-definition.z-changed { background-color: var(--syn-chg-bg); }
-.z-carriage-return { background-color: var(--syn-keyword); font-style: italic; text-decoration: underline; }
+.z-3  { color: var(--syn-comment); }
+.z-4  { color: var(--syn-constant); }
+.z-6  { color: var(--syn-string); }
+.z-7  { color: var(--syn-entity); }
+.z-10 { color: var(--syn-keyword); }
+.z-12 { color: var(--syn-variable); }

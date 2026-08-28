@@ -6,7 +6,7 @@ description = "Why this blog exists and what I will write about."
 tags = ["meta", "writing"]
 +++
 
-{% aside() %}
+{% <aside> %}
 Some recent examples:
 - [In Defense of YAML](https://opensource.posit.co/blog/2026-05-21_in-defense-of-yaml/)
 - [Writing Python like it's Rust](https://kobzol.github.io/rust/python/2023/05/20/writing-python-like-its-rust.html)
@@ -15,7 +15,7 @@ Some recent examples:
 
 and perhaps more controversially:
 - [GPL is holding R back](https://josiah.rs/posts/gpl-cost/)
-{% end %}
+{% </aside> %}
 
 These days I spend much of my time reading excellent blog posts about making data science and R faster (typically using Rust).
 I have learnt a great deal from those posts, not just about computer science, but also about the value of writing. Both
@@ -31,7 +31,7 @@ If any of the above sounds interesting to you, you're welcome to follow along or
 ## Elsewhere
 
 <div class="post-social-links" aria-label="Social links">
-  {{ icon_bluesky(href="https://bsky.app/profile/luhann.com") }}
-  {{ icon_github(href="https://github.com/luhann") }}
-  {{ icon_linkedin(href="https://www.linkedin.com/in/luke-hannan-13bb19b5/") }}
+  {{ <icon_bluesky href="https://bsky.app/profile/luhann.com" /> }}
+  {{ <icon_github href="https://github.com/luhann" /> }}
+  {{ <icon_linkedin href="https://www.linkedin.com/in/luke-hannan-13bb19b5/" /> }}
 </div>

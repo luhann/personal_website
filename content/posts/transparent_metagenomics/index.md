@@ -34,14 +34,15 @@ their own data. Much has been written about reproducible research, and in fact t
 [metascience](https://en.wikipedia.org/wiki/Metascience) itself is primarily concerned with reproducibility.
 The concepts that I will describe here are *not new*. However, while the general ideas behind reproducible research are
 broadly the same in every field, transparent and reproducible reporting in metagenomics requires substantially more effort.
-{% aside() %}
+
+{% <aside> %}
 Some recommended reading on reproducibility in general: 
 - [The Turing Way: Guide for Reproducible Research](https://book.the-turing-way.org/reproducible-research/reproducible-research)
 - [Reproducible Data Analysis Workflows](https://statsepi.substack.com/p/reproducible-data-analysis-workflows)
 - [Ten Simple Rules for Reproducible Computational Research](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285)
 
 The first resource is a particularly thorough introduction to reproducible data science.
-{% end %}
+{% </aside> %}
 
 In metascience, a distinction between reproducibility and replicability is often made. Reproducibility is whether
 other scientists (including future you) are able to reproduce your analysis as-is, with your given data and code.
@@ -57,10 +58,11 @@ that metagenomic data is extracted from real biological samples. The physical ac
 often the stage which can most drastically alter study conclusions based on the decisions made. The journey to reproducible
 research begins the moment you collect that sample, long before the data ever gets to a computer.
 
-{% aside() %}
+{% <aside> %}
 Documenting this step is critical and the [Genomic Standards Consortium](https://www.gensc.org/) has provided some guidance
 on the appropriate information to document, see [Minimum Information about any (X) Sequence (MIxS) standard.](https://www.gensc.org/pages/standards-intro.html)
-{% end %}
+{% </aside> %}
+
 Consider the simple impact of storage, on two samples from the same individual. If sample `x` remains at room temperature
 on a lab bench-top for two hours while sample `y` is immediately stored in a -80°C freezer, you may generate drastically
 different microbial compositions. Differential degradation rates, sample lysis, as well as a host of other factors can
@@ -83,20 +85,22 @@ for detailed methods for a metagenomics manuscript only to be met with this:
 Often the links to the supplementary data maintained by the journals themselves point to moved or unavailable resources.
 As an author, while this is not your fault, it is ultimately **your responsibility.** Therefore, rule number one of
 transparent metagenomics is:
-{% aside(class="left") %}
+
+{% <aside class="left"> %}
 **Rule 1**
-{% end %}
+{% </aside> %}
+
 > You must have a permanent link to your detailed methods documentation that is attached directly to the manuscript and
 > always points to the current documentation for said analysis. 
 
 Ideally this would be located in the same place that your final analysis scripts are located, and the link to both of those
-things is somewhat permanent. A good option for this is [zenodo](https://zenodo.org/). {% margin() %} See
-[zenodo's github documentation](https://help.zenodo.org/docs/github/) for information on how to do this. {% end %} Zenodo,
+things is somewhat permanent. A good option for this is [zenodo](https://zenodo.org/). {% <margin> %} See
+[zenodo's github documentation](https://help.zenodo.org/docs/github/) for information on how to do this. {% </margin> %} Zenodo,
 will not only provide a [Digital Object Identifier (DOI)](https://www.doi.org/) that links directly to your chosen
 repository, but will archive the version of your repository at the time you choose to publish on zenodo. The exact data
 and code you used to generate your findings, will be permanently linked to a specific identifier that is not tied to
-account names (which may change) or proprietary software enterprises. {% margin(class="left") %} GitHub is usually pretty
-good at tracking account name changes, but sometimes it can still lead to dead links. {% end %} Now that we are in
+account names (which may change) or proprietary software enterprises. {% <margin class="left"> %} GitHub is usually pretty
+good at tracking account name changes, but sometimes it can still lead to dead links. {% </margin> %} Now that we are in
 agreement about having permanent documentation, you may be asking what it is you should document.
 
 ## Pipeline Pathways
@@ -110,7 +114,7 @@ although in this instance it is more like a forest of forking paths.
 <figure id="pipeline-figure">
 <div class="tufte-plot-container">
   <div class="tufte-plot-item">
-    {% inline_svg() %}images/pipeline.svg{% end %}
+    {{ <inline_svg path="posts/transparent_metagenomics/images/pipeline.svg" /> }}
   </div>
 </div>
 <figcaption style="text-align:center;font-size:0.8rem;color:var(--site-muted);margin-top:0.6rem;">A simplified shotgun
@@ -123,18 +127,19 @@ or [greengenes](https://ngdc.cncb.ac.cn/databasecommons/database/id/3120) — fo
 all of these resources are typically versioned, and therefore you merely need to document the specific version of the
 resource that you used.
 
-{% aside() %} See [Salter, et al., 2014. Reagent and laboratory contamination can critically
-impact sequence-based microbiome analyses. BMC Biol 12.](https://doi.org/10.1186/s12915-014-0087-z) {% end %}
+{% <aside> %} See [Salter, et al., 2014. Reagent and laboratory contamination can critically
+impact sequence-based microbiome analyses. BMC Biol 12.](https://doi.org/10.1186/s12915-014-0087-z) {% </aside> %}
 For quality control and contaminant checking, it is not enough to just record the names and versions of software that you use.
 Ideally you should report both the code that you used to identify contaminants, and the final list of contaminants so
 that readers of your work can determine for themselves if your approach and its results are reasonable.
 
 ## Versions and the Beginning of Things
 
-{% aside() %} It goes without saying, but I'll say it anyway — the
+{% <aside> %} It goes without saying, but I'll say it anyway — the
 choice of analysis software will also drastically alter your results.  See [Nearing, et al., 2022. Microbiome differential abundance methods produce
 different results across 38 datasets. Nat Commun 13, 342.](https://doi.org/10.1038/s41467-022-28034-z)
-{% end %}
+{% </aside> %}
+
 Metagenomic software moves fast. Not only are there new software packages for metagenomic analysis almost weekly, but
 existing software updates constantly. The results obtained by a script written today, might not be reproduced if someone — 
 including yourself — re-runs the script in six months time. In fact, many R and python users can attest to the fact that
@@ -142,10 +147,10 @@ code written today might **not even work** six months in the future, and a typic
 depend on a large number of external software packages. An example of a very simple analysis metagenomic analysis script
 is shown below.
 
-{% aside(class="left") %}
+{% <aside class="left"> %}
 I'm omitting the full script for brevity, but assume that data cleaning and contaminant removal has already been done for
 the following analysis script.
-{% end %}
+{% </aside> %}
 
 ```r
 library("TreeSummarizedExperiment")
@@ -179,14 +184,16 @@ output_ancom = ancombc2(
 All of the external libraries used above, as well as the function calls (like `ancombc2()`) have two things that make
 reproducibility hard, implicit versions and implicit defaults. The options shown in the `ancombc2` are not all of the
 available options in `ancombc2` and as such, any option that is not explicitly set will be set to the default value
-the function expects. {% margin() %} See [this vignette](https://bioconductor.posit.co/packages/3.19/bioc/vignettes/ANCOMBC/inst/doc/ANCOMBC2.html)
-for all the options you can set in `ancombc2`. {% end %} If the default values have changed since you last ran your script
+the function expects. {% <margin> %} See [this vignette](https://bioconductor.posit.co/packages/3.19/bioc/vignettes/ANCOMBC/inst/doc/ANCOMBC2.html)
+for all the options you can set in `ancombc2`. {% </margin> %} If the default values have changed since you last ran your script
 then your results will unfortunately also change.
 
 Which leads me to rule number two for transparent metagenomics:
-{% aside(class="left") %}
+
+{% <aside class="left"> %}
 **Rule 2**
-{% end %}
+{% </aside> %}
+
 > **Everything** should have a version number attached.
 
 Ideally one would document all of the default options of all of the software used, but for modern metagenomics analysis
@@ -199,8 +206,8 @@ If you are working in R only, then the venerable [renv](https://rstudio.github.i
 you can hand off an R project to someone else and they should, in theory, be able to download and install the exact versions
 of all of the packages you used [^1]. [rix](https://docs.ropensci.org/rix/) is a modern contender, that aims to not only 
 snapshot your R packages, but also all of the required system dependencies for your analysis.
-{% margin() %} `rix` uses the [nix](https://nixos.org/) package manager and sources under the hood, but attempts to
-simplify interacting with `nix` through `rix`. {% end %} Finally, if you find yourself working in more than one language
+{% <margin> %} `rix` uses the [nix](https://nixos.org/) package manager and sources under the hood, but attempts to
+simplify interacting with `nix` through `rix`. {% </margin> %} Finally, if you find yourself working in more than one language
 often, then you might find [pixi](https://pixi.prefix.dev/latest/) to provide a more frictionless versioning environment
 that the previous two packages.
 
@@ -208,9 +215,10 @@ A minimal `pixi.toml` to specify the required versions of the dependencies for y
 to generate a `pixi.lock` file that has the exact versions and locations of all of your dependencies. With the `pixi.toml`
 and `pixi.lock` files, any collaborator can just type `pixi install` to reproduce the entire environment.
 
-{% aside(class="left") %}
+{% <aside class="left"> %}
 Pixi has some other very helpful features that I recommended investigating, such as task running and shell invocation.
-{% end %}
+{% </aside> %}
+
 ```toml,name=minimal_setup.toml
 [workspace]
 authors = ["Luke Hannan <luke@lukehannan.com>"]
@@ -242,7 +250,7 @@ that challenge by allowing you to specify the **entire data preparation and anal
 most popular workflow managers in bioinformatics. The example below shows how `snakemake` allows you to reproduce the
 entire [pipeline figure](#pipeline-figure) in a single easily versioned text file. Importantly, `snakemake` describes
 every step of your analysis and the causal pathways between inputs and outputs.
-{% margin() %} We'll come back to causal pathways and Directed Acyclic Graphs in the reproducibility section. {% end %}
+{% <margin> %} We'll come back to causal pathways and Directed Acyclic Graphs in the reproducibility section. {% </margin> %}
 It is able to figure out that in order to use `data/dehost/{sample}_R1.fastq.gz` as an input target for the `taxonomic_profiling`
 rule, the `remove_host` rule (and all of its upstream rules) must first be executed before `taxonomic_profiling` can
 be executed.
@@ -319,7 +327,7 @@ the current article. For a thorough overview of the challenges and best-practice
 [EMBL-EBI training on submitting metagenomic data to ENA](https://www.ebi.ac.uk/training/events/submitting-metagenomic-data-ena/).
 
 Finally, you also need to upload your analysis code. Git and GitHub are the defacto standards for uploading and storing
-your code. {% margin() %} And as mentioned earlier, integrates well with [zenodo](https://zenodo.org/).{% end %}
+your code. {% <margin> %} And as mentioned earlier, integrates well with [zenodo](https://zenodo.org/).{% </margin> %}
 There are *many, [many](https://github.blog/developer-skills/github/beginners-guide-to-github-uploading-files-and-folders-to-github/)*
 [tutorials](https://swcarpentry.github.io/git-novice/) on using Git and GitHub, but if the aim is to just archive the final
 analysis code, using GitHub is the simplest option. Just click the green upload button in the interface shown below,
@@ -337,9 +345,10 @@ understanding the software you depend on, but for purely archival purposes direc
 will be enough for many researchers. Using the methods described above is sufficient to satisfy rule three of transparent
 metagenomics:
 
-{% aside(class="left") %}
+{% <aside class="left"> %}
 **Rule 3**
-{% end %}
+{% </aside> %}
+
 > If it is mentioned in your manuscript, it must be online and **accessible**.
 
 [This excellent post by the Meren lab](https://merenlab.org/2026/04/15/unfalsifiable-by-design/) describes how paying
@@ -355,8 +364,8 @@ is causal. Therefore, in order to make sure your science is **replicable** there
 
 Firstly, are your results **internally replicable**. If you performed your analysis for a second time — from the beginning — 
 using different but equivalent tools would you still come to the same conclusions.
-{% margin() %} There are many alternatives for all the common tools used in metagenomic analyses. Often choosing between
-alternatives is a matter of preference not performance. {% end %}
+{% <margin> %} There are many alternatives for all the common tools used in metagenomic analyses. Often choosing between
+alternatives is a matter of preference not performance. {% </margin> %}
 Does choosing [ANCOM-BC2](https://github.com/frederickhuanglin/ANCOMBC) alter your final conclusions, compared to if you
 had used [radEmu](https://github.com/statdivlab/radEmu). If you re-run your *k-means* clustering algorithm with a different
 random seed do your results change entirely?
@@ -381,7 +390,7 @@ results they are able to discern which ASVs should reproduce and which might not
 <figure>
 <div class="tufte-plot-container">
   <div class="tufte-plot-item">
-    {% inline_svg() %}images/venn_da.svg{% end %}
+    {{ <inline_svg path="posts/transparent_metagenomics/images/venn_da.svg" /> }}
   </div>
 </div>
 <figcaption style="text-align:center;font-size:0.8rem;color:var(--site-muted);margin-top:0.6rem;">Significant ASVs from three DA methods. ASVs reproduced across all methods (centre) carry the highest confidence; those unique to a single method (outer arcs) should be interpreted with caution.</figcaption>
@@ -393,20 +402,21 @@ sample sizes of typical metagenomic studies. The need for caution in interpretat
 evaluate the relationship between microbial relative abundance and health biomarkers [^3]. This would lead to rule four
 for transparent metagenomics:
 
-{% aside(class="left") %}
+{% <aside class="left"> %}
 **Rule 4**
-{% end %}
+{% </aside> %}
+
 > Make sure that your analyses reproduce within your study, across methods.
 
 If you’ll indulge me one concluding footnote, in metagenomics as in all science the most important concerns of reproducibility
 are not technical they are scientific. The recent article by [Mitchell et al.](https://doi.org/10.1016/j.neuron.2025.10.006)
-illustrates many of the aspects discussed in this post. {% margin() %} The title is: "Conceptual and methodological flaws
-undermine claims of a link between the gut microbiome and autism". {% end %}
+illustrates many of the aspects discussed in this post. {% <margin> %} The title is: "Conceptual and methodological flaws
+undermine claims of a link between the gut microbiome and autism". {% </margin> %}
 The fundamental issue it raises is not about software versions or dead hyperlinks, it is about whether the associations
 being reported are meaningful in the first place. In metagenomics, as in all observational science, association does
 not imply causation. Microbial relative abundances are **compositional**,
-{% margin() %} Meaning every taxon's apparent abundance is defined in relation to all others, a feature that makes standard
-statistical tests misleading without appropriate correction. {% end %} and the associations we observe between community
+{% <margin> %} Meaning every taxon's apparent abundance is defined in relation to all others, a feature that makes standard
+statistical tests misleading without appropriate correction. {% </margin> %} and the associations we observe between community
 composition and health outcomes may reflect confounding, reverse causation, or simply artefacts of the garden of forking paths
 described above. Making genuine causal claims from metagenomic data requires either experimental intervention or very careful
 application of causal inference methods. Without that, a perfectly reproducible and internally replicable association
@@ -415,7 +425,7 @@ study may still leave the most important scientific questions with unsatisfactor
 <figure>
 <div class="tufte-plot-container">
   <div class="tufte-plot-item">
-    {% inline_svg() %}images/causal_dag.svg{% end %}
+    {{ <inline_svg path="posts/transparent_metagenomics/images/causal_dag.svg" /> }}
   </div>
 </div>
 <figcaption style="text-align:center;font-size:0.8rem;color:var(--site-muted);margin-top:0.6rem;">A directed acyclic graph (DAG) for a typical microbiome association study. Unmeasured confounders — diet, host genetics, antibiotic use, age — independently shape both community composition and health outcomes, inducing a spurious association even when no direct causal path exists. The dashed arrows between Microbiome and Health Outcome represent the association we observe; distinguishing genuine causation from confounding or reverse causation requires experimental intervention or formal causal inference.</figcaption>

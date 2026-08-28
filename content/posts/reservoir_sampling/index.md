@@ -9,15 +9,17 @@ tags = ["rust", "algorithms"]
 I personally find that one of the most fun ways to learn a new programming language (particularly a [systems programming
 language](https://en.wikipedia.org/wiki/System_programming_language)) is to take a relatively simple program and 
 see how much you can optimise it. Just for the hell of it. I like to call this:
-{% margin() %}
+
+{% <margin> %}
 Perhaps in a later blog post I'll expand on this further.
-{% end %}
+{% </margin> %}
 
 > In pursuit of meaningless minimalism.
 
-{% margin(class="quote-note") %}
+{% <margin class="quote-note"> %}
 We should forget about small efficiencies, say about 97% of the time: **premature optimization is the root of all evil**. Yet we should not pass up our opportunities in that critical 3% - Donald Knuth
-{% end %}
+{% </margin> %}
+
 Recently, with the goal of learning [Rust](https://rust-lang.org/) I converted all of my old Fish shell scripts to
 Rust binaries. This will come as no surprise to anyone but Rust is far more capable than Fish, and so while translating
 my shell scripts to Rust I decided to see if I could make them **faster**. One utility that I thought would be ripe for
@@ -39,15 +41,17 @@ set -l WALL (find "."  $WALLPAPER_DIR \
 As you can see, the Fish implementation loads the full list of files into memory, sorts them randomly and picks the first one.
 Between shell invocation overhead, firing up **three separate utilities**, and piping text streams between them, we incur
 significant overhead. All of that, just to discard the entire list of files bar one.
-{% margin() %}
+
+{% <margin> %}
 To guard against the hypothetical edge case where I have more images than there are atoms in the universe.
-{% end %}
+{% </margin> %}
+
 For my Rust utility, I wanted to make sure that I never have to read the entire list of files into memory.
 
 Enter [Reservoir Sampling](https://en.wikipedia.org/wiki/Reservoir_sampling). Reservoir sampling is a family of algorithms
 for choosing a simple random sample of *k* elements, without replacement, from a population of size *n* — without needing
-to know the population size (*n*). {% margin(class="left") %}I know, I know, em-dashes are signs of AI use. You can take
-my em-dashes from my cold, dead hands.{% end %}The naïve implementation is known as Algorithm R, created by Alan Waterman[^1],
+to know the population size (*n*). {% <margin class="left"> %}I know, I know, em-dashes are signs of AI use. You can take
+my em-dashes from my cold, dead hands.{% </margin> %}The naïve implementation is known as Algorithm R, created by Alan Waterman[^1],
 and is conceptually relatively straightforward.
 
 First select the first *k* elements of *n*, where *k* is the sample size you would like. Next initialise a new index to
@@ -90,11 +94,12 @@ number. Algorithm L generates 3 random numbers for each evaluated element, but 0
 Given that the majority of elements are skipped, this works out to far fewer random number generations than Algorithm R.
 
 A standard implementation of Algorithm L in Rust looks something like this:
-{% aside(class="left") %}
-For *k* = 1.
-{% end %}
 
-{% aside() %}
+{% <aside class="left"> %}
+For *k* = 1.
+{% </aside> %}
+
+{% <aside> %}
 A bit of Rust pedantry here: looking at `inputs.nth(skip)`, it might seem like we are cleanly skipping over unneeded elements.
 However, because our iterator is an unknown-length filesystem stream, `nth()` is forced to call `next()` under the hood
 until it reaches the target. We are saving ourselves from generating random numbers, but we are still evaluating every
@@ -103,7 +108,8 @@ single directory entry in between.
 If we were sampling from a data structure that supported *O(1)* random access, Algorithm L would be significantly faster.
 But converting the directory stream into an array would require loading all the file paths into memory first, which obviates
 the entire raison d'être of reservoir sampling.
-{% end %}
+{% </aside> %}
+
 ```rust, name=algorithm_l.rs
 fn algorithm_l<I>(inputs: I) -> Option<PathBuf>
 where
@@ -138,23 +144,26 @@ where
 
 We have achieved peak meaningless minimalism. End of story, or so I thought. However, every good meaningless minimalist knows
 that peak minimalism is only achieved once the benchmarks say it has been achieved.
-{% margin() %}
+
+{% <margin> %}
 Andrew Gallant, aka [BurntSushi](https://github.com/burntsushi), has perhaps the best [post on benchmarking](https://burntsushi.net/ripgrep/) I have ever
 read, and it should be required reading for anyone comparing anything with benchmarks. 
-{% end %}
+{% </margin> %}
+
 Using the Rust implementations described above, we can benchmark just the random wallpaper selection section of code using
 the [criterion crate](https://crates.io/crates/criterion).
 
 <div class="tufte-plot-container">
   <div class="tufte-plot-item">
-    {% inline_svg() %}images/violin.svg{% end %}
+    {{ <inline_svg path="posts/reservoir_sampling/images/violin.svg" /> }}
   </div>
 </div>
-{% aside() %}
+
+{% <aside> %}
 The benchmarks shown here were calculated on my Ryzen 5950x in a TTY.
 
 Notably, I used the list of my wallpapers stored in RAM as the test case. I currently have 51 wallpapers in my directory.
-{% end %}
+{% </aside> %}
 
 <div style="display: flex; gap: 20px; overflow-x: auto; font-size: 0.75rem; font-family: sans-serif;">
 <div style="flex: 1; min-width: 300px;">
@@ -210,10 +219,12 @@ crate to generate random numbers, they are not true random numbers but are very 
 by making use of Rust's iterators which are lazily evaluated. Filter unsupported image types to reduce the number of
 elements evaluated for reservoir sampling. Use only `DirEntry` not `PathBuf`, so no allocations are needed. Putting
 that all together, the final version of my random wallpaper utility looks something like this:
-{% aside() %}
+
+{% <aside> %}
 The core implementation of algorithm R is in the commented reservoir sampling block. A plus side of using Algorithm R
 is that it is much easier to understand, even if you know nothing about reservoir sampling.
-{% end %}
+{% </aside> %}
+
 ```rust,name=algorithm_r.rs
 fn pick_random_wallpaper(dir: &Path) -> Result<Option<walkdir::DirEntry>, Box<dyn Error>> {
     let candidates = WalkDir::new(dir)
@@ -245,7 +256,7 @@ below shows implementations for algorithm R and algorithm L optimised in the sam
 
 <div class="tufte-plot-container">
   <div class="tufte-plot-item">
-    {% inline_svg() %}images/inflection.svg{% end %}
+    {{ <inline_svg path="posts/reservoir_sampling/images/inflection.svg" /> }}
   </div>
 </div>
 
