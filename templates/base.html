@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block description %}{{ config.description }}{% endblock description %}">
     <meta name="color-scheme" content="dark light">
-    <link rel="canonical" href="https://luhann.com" />
+    {# current_url is undefined on the 404 page, which should declare no canonical. #}
+    {% if current_url %}<link rel="canonical" href="{{ current_url | safe }}">{% endif %}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <script>
         (function () {
