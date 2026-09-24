@@ -91,7 +91,7 @@ It forces a certain level of intentionality that my previous Hugo setup lacked.
 When you run `zola build`, Zola parses your Markdown files and automatically injects the text into the corresponding HTML
 templates. What this means is that you only have to write your core template logic once. From then on, creating a new post
 is straightforward, just add a new Markdown file into a folder and `zola build`. {% <margin> %} The source for my website can be found
-here [https://github.com/luhann/luhann.github.io](https://github.com/luhann/luhann.github.io) as a more detailed demonstration. {% </margin> %}
+here [https://github.com/luhann/personal_website](https://github.com/luhann/personal_website) as a more detailed demonstration. {% </margin> %}
 What this gives me is a website that requires no external themes or dependencies — so cannot break like my previous Hugo site — 
 but the flexibility of editing raw `html` for each page of my site if I so desire.
 
