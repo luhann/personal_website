@@ -66,6 +66,10 @@ html[data-theme="light"] {
 
 body {
   margin: 0;
+  // CJK faces have no italic; a synthesised one slants the glyphs, which reads
+  // badly (a browser-translated page, say). Every Latin face used in italic
+  // ships a real one (refresh-fonts.py), so this only ever stops a fake.
+  font-synthesis-style: none;
   background-color: var(--site-bg);
   color: var(--site-text);
   font-family: $font-serif;
